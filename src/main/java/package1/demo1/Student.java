@@ -36,4 +36,10 @@ public class Student {
     public String getName(){
         return name;
     }
+    //static Method
+    public static void getmessage(){
+        System.out.println("Hello world!. This is a Static Method");
+    }
+
+
 }

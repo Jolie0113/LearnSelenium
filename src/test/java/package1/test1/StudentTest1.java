@@ -17,7 +17,7 @@ public class StudentTest1 {
     @Test
     public  void creteOblectthroughtMethodTest(){
         Student student = new Student();
-        student.setId(2); // cham cac ham
+        student.setId(2); // object cham cac ham
         student.setName("Marry");
         System.out.println("ID: "+student.id+" Name: "+student.name); // cham thuoc tinh
 
@@ -28,14 +28,14 @@ public class StudentTest1 {
         System.out.println("ID: "+student.id+" Name: "+student.name);
 
     }
-
-
-
-
     @Test
     public void accessSpecifierPublictest(){
         Student student = new Student(4,"Join");
         System.out.println("ID: "+student.getId()+" Name: "+student.getName()); // goi ham -> cham ham
     }
+    @Test
+    public void staticMethodTest(){
+        Student.getmessage(); // Class.hamStaticMethod
 
+    }
 }
