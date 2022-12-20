@@ -15,6 +15,10 @@ public class RegisterAccountPage extends BasePage{
     private WebElement btnCheckbox;
     private WebElement btnContinue;
 
+    public RegisterAccountPage(WebDriver webDriver) {
+        super(webDriver);
+    }
+
     public void registerAccount(String firstName, String lastName, String email, String telephone, String Password, String confirmPassword)
             throws InterruptedException {
 
@@ -38,11 +42,5 @@ public class RegisterAccountPage extends BasePage{
         btnContinue.click();
 
         Thread.sleep(3000);
-
-
     }
-    public RegisterAccountPage(WebDriver webDriver) {
-        super(webDriver);
-    }
-
 }

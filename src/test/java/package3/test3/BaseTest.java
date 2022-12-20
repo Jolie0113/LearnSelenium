@@ -5,6 +5,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
@@ -19,14 +20,24 @@ public class BaseTest {
     public void beforeTest(){
 //        System.setProperty("webdriver.chrome.driver","src/test/resources/drivers/chromedriver.exe");
 //        webDriver = new ChromeDriver();
+
 //        webDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(timeout));
 
 
         webDriver = WebDriverManager.getInstance("Chrome").create();
+
         webDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(timeout));
+
 
         webDriver.manage().window().maximize();
     }
+    @AfterTest
+    public void Thread() throws InterruptedException {
+        Thread.sleep(3000);
+    }
+
+
+
 
 //    public void login(){
 //        webDriver.get("http://tutorialsninja.com/demo/");
@@ -48,6 +59,4 @@ public class BaseTest {
 //        btnLoginsuc.click();
 //
 //    }
-
-
 }

@@ -13,7 +13,21 @@ import package2.tutorialsninja.ui.pages.LoginPage;
 import java.time.Duration;
 
 public class LoginTest extends BaseTest{
+    private String em = "vantest04@gmail.com";
+    private String pass = "Van@1239911";
 
+    @Test
+    public void loginTest2(){
+
+        webDriver.get("http://tutorialsninja.com/demo/index.php?route=account/login");
+
+        //Khai bao 1 Object LoginPage
+        LoginPage loginPage = new LoginPage(webDriver);
+
+        loginPage.login(em, pass);
+
+
+    }
     @Test
     public void loginTest1(){
 
@@ -35,17 +49,6 @@ public class LoginTest extends BaseTest{
 
         WebElement btnLoginsuc =  webDriver.findElement(By.xpath("//input[@type = 'submit' and @class= 'btn btn-primary']"));
         btnLoginsuc.click();
-
-    }
-    @Test
-    public void loginTest2(){
-
-        webDriver.get("http://tutorialsninja.com/demo/index.php?route=account/login");
-
-        //Khai bao 1 Object LoginPage
-        LoginPage loginPage = new LoginPage(webDriver);
-        loginPage.login("vantest04@gmail.com", "Van@1239999");
-
 
     }
 

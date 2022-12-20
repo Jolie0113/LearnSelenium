@@ -8,20 +8,17 @@ public class LoginPage extends  BasePage{
 
     private WebElement txtEmail;
     private  WebElement txtPass;
-
     private WebElement btnLogin;
 
     public LoginPage(WebDriver webDriver) {
         super(webDriver);
     }
 
-
     public void login(String email, String password){
 
 
 //        WebElement btnMyAccount =  webDriver.findElement(By.xpath("//span[text()='My Account']"));
 //        btnMyAccount.click();
-//
 //        WebElement btnLogin =  webDriver.findElement(By.linkText("Login"));
 //        btnLogin.click();
 
