@@ -13,8 +13,8 @@ import package2.tutorialsninja.ui.pages.LoginPage;
 import java.time.Duration;
 
 public class LoginTest extends BaseTest{
-    private String em = "vantest04@gmail.com";
-    private String pass = "Van@1239911";
+    private String em = "vantest16@gmail.com";
+    private String pass = "Van@12399";
 
     @Test
     public void loginTest2(){
@@ -25,9 +25,9 @@ public class LoginTest extends BaseTest{
         LoginPage loginPage = new LoginPage(webDriver);
 
         loginPage.login(em, pass);
-
-
     }
+
+
     @Test
     public void loginTest1(){
 

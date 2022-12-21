@@ -16,6 +16,11 @@ public class BaseTest {
     protected WebDriver webDriver;
     private final int timeout = 10;
 
+    private static final int pageloadTimeout = 60; // đây là giá trị Maximum time, scrip sẽ chờ trước khi thực thi các câu lệnh khác     ->
+    // ý nghĩa: scrip sẽ chờ Max là 60s cho pageLoad load lên,
+    // Nếu mà pageLoad mất 70s để load xong thì scrip sẽ fail.
+    // Nếu mà pageLoad mất 1s,.. để load xong thì scrip sẽ chạy luôn mà k cần chờ hết 60s
+
     @BeforeTest
     public void beforeTest(){
 //        System.setProperty("webdriver.chrome.driver","src/test/resources/drivers/chromedriver.exe");
@@ -25,6 +30,8 @@ public class BaseTest {
 
 
         webDriver = WebDriverManager.getInstance("Chrome").create();
+
+        webDriver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(pageloadTimeout));
 
         webDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(timeout));
 

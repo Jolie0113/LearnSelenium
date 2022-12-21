@@ -10,7 +10,7 @@ import package2.tutorialsninja.ui.pages.RegisterAccountPage;
 public class RegisterTest extends BaseTest{
     String fName = "Mafoi";
     String lName = "Potter2";
-    String email = "vantest14@gmail.com";
+    String email = "vantest16@gmail.com";
     String telephone= "0969205888";
     String password = "Van@12399";
     String confirmPassword = "Van@12399";

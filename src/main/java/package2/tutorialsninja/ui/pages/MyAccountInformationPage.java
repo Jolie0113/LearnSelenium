@@ -3,9 +3,24 @@ package package2.tutorialsninja.ui.pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.testng.Assert;
+import org.openqa.selenium.support.FindBy;
+//import org.testng.Assert;
 
 public class MyAccountInformationPage extends BasePage{
+    @FindBy(xpath = "//input[@id='input-firstname']")
+    private WebElement txtFirstName1;
+
+    @FindBy(xpath = "//input[@id='input-lastname']")
+    private WebElement txtLastName1;
+
+    @FindBy(xpath = "//input[@id='input-email']")
+    private WebElement txtEmail1;
+
+    @FindBy(xpath = "//input[@id='input-telephone']")
+    private WebElement txtTelephone1;
+
+    @FindBy(xpath = "//input[@value= 'Continue']")
+    private WebElement btnContinue;
 
     public MyAccountInformationPage(WebDriver webDriver) {
         super(webDriver);
@@ -15,34 +30,34 @@ public class MyAccountInformationPage extends BasePage{
         editYourAccount.click();
 
     }
-    public void verifyAccountInformation(){
-
-        WebElement txtFirstName1 = webDriver.findElement(By.xpath("//input[@id='input-firstname']"));
-        WebElement txtLastName1 = webDriver.findElement(By.xpath("//input[@id='input-lastname']"));
-        WebElement txtEmail1 =  webDriver.findElement(By.xpath("//input[@id='input-email']"));
-        WebElement txtTelephone1 =  webDriver.findElement(By.xpath("//input[@id='input-telephone']"));
-
-        String fN = txtFirstName1.getAttribute("value"); // lấy thông tin của thuộc tính dùng Atribute
-        String lN = txtLastName1.getAttribute("value");
-        String tE = txtEmail1.getAttribute("value");
-        String tT = txtTelephone1.getAttribute("value");
-
-        Assert.assertEquals(fN, "Mafoi");
-        Assert.assertEquals(lN, "Potter2");
-        Assert.assertEquals(tE, "vantest14@gmail.com");
-        Assert.assertEquals(tT, "0969205888");
+    public String getFirstName(){
+        return txtFirstName1.getAttribute("value");
     }
-    public void editMyAccountInformation(){
-        WebElement txtFirstName1 = webDriver.findElement(By.xpath("//input[@id='input-firstname']"));
-        WebElement txtLastName1 = webDriver.findElement(By.xpath("//input[@id='input-lastname']"));
-        WebElement txtEmail1 =  webDriver.findElement(By.xpath("//input[@id='input-email']"));
-        WebElement txtTelephone1 =  webDriver.findElement(By.xpath("//input[@id='input-telephone']"));
+    public String getLastName(){
+        return txtLastName1.getAttribute("value");
+    }
+    public String getEmail(){
+        return txtEmail1.getAttribute("value");
+    }
+    public String getTelephone(){
+        return  txtTelephone1.getAttribute("value");
+    }
 
-        txtFirstName1.clear();
-        txtFirstName1.sendKeys("Hermione");
+    //set
 
-        txtLastName1.clear();
-        txtLastName1.sendKeys("Alber");
+    public void setTxtFirstName1(String firstName1){
+//        txtFirstName1.clear();
+//        txtFirstName1.sendKeys(firstName1);
+        setText(txtFirstName1, firstName1);
+    }
+    public void setTxtLastName1(String lastName1){
+        setText(txtLastName1,lastName1);
+    }
+    public void setTxtTelephone1(String telephone1){
+        setText(txtTelephone1,telephone1);
+    }
 
+    public void clickContinue(){
+        btnContinue.click();
     }
 }
