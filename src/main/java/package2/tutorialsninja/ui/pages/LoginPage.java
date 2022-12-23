@@ -28,9 +28,21 @@ public class LoginPage extends  BasePage{
 //        txtPass =  webDriver.findElement(By.xpath("//input[@id = 'input-password']"));
 //        btnLogin =  webDriver.findElement(    By.xpath("//input[@type = 'submit' and @class= 'btn btn-primary']"));
 
-        setText(txtEmail,email);
-        setText(txtPass,password);
-        btnLogin.click();
+        inputText(txtEmail,email);
+        inputText(txtPass,password);
+
+        click(btnLogin);
     }
+    public void loginBy(String email, String password){
+
+        By bytxtEmail = By.xpath("//input[@id = 'input-email']");
+        By bytxtPass = By.xpath("//input[@id = 'input-password']");
+        By bybtnLogin = By.xpath("//input[@type = 'submit' and @class= 'btn btn-primary']");
+
+        inputText(bytxtEmail, email);
+        inputText(bytxtPass,password);
+        click(bybtnLogin);
+    }
+
 
 }

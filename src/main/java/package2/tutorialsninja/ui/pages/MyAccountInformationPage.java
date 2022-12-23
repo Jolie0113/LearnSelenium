@@ -48,13 +48,13 @@ public class MyAccountInformationPage extends BasePage{
     public void setTxtFirstName1(String firstName1){
 //        txtFirstName1.clear();
 //        txtFirstName1.sendKeys(firstName1);
-        setText(txtFirstName1, firstName1);
+        inputText(txtFirstName1, firstName1);
     }
     public void setTxtLastName1(String lastName1){
-        setText(txtLastName1,lastName1);
+        inputText(txtLastName1,lastName1);
     }
     public void setTxtTelephone1(String telephone1){
-        setText(txtTelephone1,telephone1);
+        inputText(txtTelephone1,telephone1);
     }
 
     public void clickContinue(){

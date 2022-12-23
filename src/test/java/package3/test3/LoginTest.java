@@ -26,6 +26,16 @@ public class LoginTest extends BaseTest{
 
         loginPage.login(em, pass);
     }
+    @Test
+    public void loginTest3(){
+
+        webDriver.get("http://tutorialsninja.com/demo/index.php?route=account/login");
+
+        //Khai bao 1 Object LoginPage
+        LoginPage loginPage = new LoginPage(webDriver);
+
+        loginPage.loginBy(em, pass);
+    }
 
 
     @Test
