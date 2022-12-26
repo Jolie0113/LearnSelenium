@@ -15,13 +15,14 @@ public class BasePage {
     private WebDriverWait webDriverWait;
 
     private static final int timeout =60;
-//    protected javascriptExucutor  javascriptExucutor;
+    protected JavascriptExecutor javascriptExecutor;
 
     public BasePage(WebDriver webDriver) {
         this.webDriver = webDriver;
-        webDriverWait= new WebDriverWait(webDriver, Duration.ofSeconds(60));
+        webDriverWait= new WebDriverWait(webDriver, Duration.ofSeconds(timeout));
 
-//        javascriptExucutor = (JavascriptExecutor)webDriver;
+
+        javascriptExecutor = (JavascriptExecutor) webDriver ;
 
         PageFactory.initElements(webDriver,this);  // dùng để lược bỏ hết các findElement By.
     }
@@ -45,12 +46,12 @@ public class BasePage {
         webElement.sendKeys(text);
     }
 
-//    protected void setText(WebElement webElement, String text) {
-//        webDriverWait
-//                .until(ExpectedConditions.elementToBeClickable(webElement));
-//
-//        javascriptExucutor.("argument[0].setA")
-//    }
+    protected void setText(WebElement webElement, String text) {
+        webDriverWait
+                .until(ExpectedConditions.visibilityOf(webElement));
+
+       javascriptExecutor.executeScript("argument[0].setAttribute('value',argument[1]);",webElement,text);
+    }
 
     protected void click(WebElement webElement){
         webDriverWait
