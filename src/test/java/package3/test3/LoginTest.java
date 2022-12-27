@@ -14,7 +14,7 @@ import java.time.Duration;
 
 public class LoginTest extends BaseTest{
     private String em = "vantest16@gmail.com";
-    private String pass = "Van@12399";
+        private String pass = "Van@12399";
 
     @Test
     public void loginTest2(){

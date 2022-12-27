@@ -40,7 +40,7 @@ public class BaseTest {
     }
     @AfterTest
     public void Thread() throws InterruptedException {
-        Thread.sleep(3000);
+        Thread.sleep(5000);
     }
 
 

@@ -1,20 +1,20 @@
 package package2.test2;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import java.time.Duration;
-
 import org.openqa.selenium.JavascriptExecutor;
+
+import java.time.Duration;
+import java.util.ArrayList;
 
 public class ElementTests {
     protected WebDriver webDriver;
@@ -63,12 +63,12 @@ public class ElementTests {
 
         JavascriptExecutor js = (JavascriptExecutor) webDriver;
 //        js.executeScript("window.scrollTo(0,500)"); //Để cuộn trang theo chiều dọc 500px
-//        js.executeScript("window.scrollTo(0,document.body.scrollHeight)"); //  Để cuộn trang theo chiều dọc cho đến hết (cuối trang)
+        js.executeScript("window.scrollTo(0,document.body.scrollHeight)"); //  Để cuộn trang theo chiều dọc cho đến hết (cuối trang)
 
 
         WebElement elVisibleAfter = webDriver.findElement(By.xpath("//button[@id ='visibleAfter']"));
 
-        js.executeScript("arguments[0].scrollIntoView(true);", elVisibleAfter); //Để cuộn tới 1 phần tử trong trang (này dùng nhiều)
+//        js.executeScript("arguments[0].scrollIntoView(true);", elVisibleAfter); //Để cuộn tới 1 phần tử trong trang (này dùng nhiều)
 
 
         elVisibleAfter.click();
@@ -258,19 +258,132 @@ public class ElementTests {
 
         Select selectYear = new Select(eYear);
         selectYear.selectByIndex(3); //cach3
+    }
+    @Test
+    public void iframeTest(){
+        webDriver.get("https://demoqa.com/frames");
 
+
+        //================================================
+        //Muon tuong tác với element trong iframe -> dùng câu lệnh: webDriver.switchTo().frame(id/...);
+        webDriver.switchTo().frame("frame1");
+
+        By byHeading = By.id("sampleHeading");
+
+        String Heading = webDriverWait
+                .until(ExpectedConditions.visibilityOfElementLocated(byHeading))
+                .getText();
+
+        Assert.assertEquals(Heading,"This is a sample page");
+
+        //=============================================
+        //câu lênh thoát ra ngoài frame để tương tác với element bên ngoài frame đó : webDriver.switchTo().defaultContent();
+
+        webDriver.switchTo().defaultContent();
+        By byMainHeader = By.className("main-header");
+
+        String mainHear = webDriverWait
+                .until(ExpectedConditions.visibilityOfElementLocated(byMainHeader))
+                .getText();
+
+        Assert.assertEquals(mainHear,"Frames");
+    }
+    @Test
+    public void alertTest(){
+        webDriver.get("https://demoqa.com/alerts");
+        //=========
+        //
+        By byClick = By.id("alertButton");
+
+        webDriverWait
+                .until(ExpectedConditions.elementToBeClickable(byClick))
+                .click();
+// cach 1
+//        webDriver.switchTo().alert().accept();
+//cach 2
+        Alert alert = webDriver.switchTo().alert();
+        alert.accept();
+//        alert.dismiss();
+//        alert.sendKeys("Van xinh gai");
+    }
+    @Test
+    public void alertTest2(){
+        webDriver.get("https://demoqa.com/alerts");
+        //=========
+        //
+        By byClick = By.id("timerAlertButton");
+//        //cach1:
+//        webDriver.findElement(byClick).click();
+        //cach2:
+
+        webDriverWait
+                .until(ExpectedConditions.elementToBeClickable(byClick))
+                .click();
+        webDriverWait
+                .until(ExpectedConditions.alertIsPresent());
+
+        Alert alert = webDriver.switchTo().alert();
+        alert.accept();
+
+    }
+    @Test
+    public void alertTest3(){
+        webDriver.get("https://demoqa.com/alerts");
+        //=========
+        //
+        By byClick = By.id("promtButton");
+
+
+
+        JavascriptExecutor js = (JavascriptExecutor) webDriver;
+//        js.executeScript("arguments[0].scrollIntoView(true);", byClick);
+        js.executeScript("window.scrollTo(0,200)"); //Để cuộn trang theo chiều dọc 500px
+
+//        //cach1:
+//        webDriver.findElement(byClick).click();
+
+        //cach2:
+        webDriverWait
+                .until(ExpectedConditions.elementToBeClickable(byClick))
+                .click();
+
+
+        webDriverWait
+                .until(ExpectedConditions.alertIsPresent()); // tương tác với Alert, chờ Alert xuất hiện
+
+        Alert alert = webDriver.switchTo().alert();
+        alert.sendKeys("Van xinh gai 3");
+        alert.accept();
+
+
+        By byResult = By.id("promptResult");
+        WebElement eResult = webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(byResult));
+        String result = eResult.getText();
+
+        Assert.assertTrue(result.contains("Van xinh gai 3"));
+    }
+    @Test
+    public void tabTest(){
+        webDriver.get("https://demoqa.com/browser-windows");
+        By byTab = By.id("tabButton");
+        WebElement eTab = webDriverWait.until(ExpectedConditions.elementToBeClickable(byTab));
+        eTab.click();
+
+        // Câu lệnh tương tác với tab mới
+        ArrayList<String> newTab = new ArrayList<>(webDriver.getWindowHandles());
+        webDriver.switchTo().window(newTab.get(1));
+
+        By byHeading = By.id("sampleHeading");
+        WebElement eHeading = webDriverWait.until(ExpectedConditions.elementToBeClickable(byHeading));
+        String heading = eHeading.getText();
+
+        Assert.assertEquals(heading,"This is a sample page");
+
+        //quay tro ve tab trước
+        webDriver.switchTo().window(newTab.get(0));
 
 
     }
-
-
-
-
-
-
-
-
-
 
 
 

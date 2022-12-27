@@ -12,7 +12,7 @@ import java.time.Duration;
 
 public class BasePage {
     protected WebDriver webDriver;
-    private WebDriverWait webDriverWait;
+    protected WebDriverWait webDriverWait;
 
     private static final int timeout =60;
     protected JavascriptExecutor javascriptExecutor;
@@ -62,6 +62,23 @@ public class BasePage {
         webDriverWait
                 .until(ExpectedConditions.elementToBeClickable(by))
                 .click();
+    }
+
+    public String getPageTitle(){
+        return webDriver.getTitle();
+    }
+
+    public String getText(By by){
+        return webDriverWait
+                .until(ExpectedConditions.visibilityOfElementLocated(by))
+                .getText();
+
+    }
+    public String getText(WebElement el){
+        return webDriverWait
+                .until(ExpectedConditions.visibilityOf(el))
+                .getText();
+
     }
 
 
